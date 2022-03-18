@@ -16,10 +16,7 @@ import dao.*;
 import modelo.*;
 
 public class Fachada {
-
-	private static String nome;
-	private static String nascimento;
-
+	
 	private static DAOContato daoContato = new DAOContato();
 	private static DAOEndereco daoEndereco = new DAOEndereco();
 	private static DAOTelefone daoTelefone = new DAOTelefone();
@@ -39,7 +36,7 @@ public class Fachada {
 
 		if (contato != null) {
 			DAO.rollback();
-			throw new Exception("Contato:" + nome + "já cadastrado(a).");
+			throw new Exception("Contato: " + nome + " já cadastrado(a).");
 		}
 
 		LocalDate data;
@@ -54,6 +51,7 @@ public class Fachada {
 
 		if (endereco == null) {
 			endereco = new Endereco(logradouro, bairro);
+			daoEndereco.create(endereco);
 		}
 
 		// Novo Contato
@@ -77,14 +75,14 @@ public class Fachada {
 		// Checar se contato já existe
 		if (contato == null) {
 			DAO.rollback();
-			throw new Exception("adicionar telefone - contato inexistente:" + nome); }
+			throw new Exception("Adicionar telefone - Contato inexistente: " + nome); }
 
 		Telefone telefone = contato.localizarTelefone(numero);
 
 		// Checar se o número já está cadastrado
 		if (telefone != null) {
 			DAO.rollback();
-			throw new Exception("adicionar telefone - numero duplicado para o contato:" + numero +"/"+nome);
+			throw new Exception("Adicionar telefone - número duplicado para o contato: " + numero +"/"+nome);
 		} else {
 			telefone = new Telefone(numero);
 		}
@@ -109,12 +107,12 @@ public class Fachada {
 		Contato contato = daoContato.read(nome);
 		if (contato == null) {
 			DAO.rollback();
-			throw new Exception("remover telefone - contato inexistente:" + nome); }
+			throw new Exception("Remover telefone - Contato inexistente: " + nome); }
 
 		Telefone telefone = contato.localizarTelefone(numero);
 		if(telefone == null) {
 			DAO.rollback();
-			throw new Exception("remover telefone - contato nao possui o numero :" + numero +"/"+nome); }
+			throw new Exception("Remover telefone - Contato nao possui o número : " + numero +"/"+nome); }
 		
 		contato.remover(telefone);
 		daoContato.update(contato);
@@ -140,13 +138,13 @@ public class Fachada {
 		Telefone telefone1 = daoTelefone.read(numero);
 		if (telefone1 == null) {
 			DAO.rollback();
-			throw new Exception("alterar telefone - numero inexistente:" + numero); }
+			throw new Exception("Alterar telefone - Número inexistente:" + numero); }
 
 		// Checar existência telefone
 		Telefone telefone2 = daoTelefone.read(novo);
 		if (telefone2 != null) {
 			DAO.rollback();
-			throw new Exception("alterar telefone - numero existente:" + novo); }
+			throw new Exception("Alterar telefone - Número existente:" + novo); }
 		
 		telefone1.setNumero(novo);
 		daoTelefone.update(telefone1);
@@ -170,7 +168,6 @@ public class Fachada {
 		return listaContatos;
 	}
 			
-		
 	public static List<Telefone> listarTelefones(String digitos) {
 		
 		List<Telefone> listaTelefones = new ArrayList<>();
@@ -187,39 +184,12 @@ public class Fachada {
 		return listaTelefones;
 	}
 
-
 	public static List<Endereco> listarEnderecos() { return daoEndereco.readAll(); }
-		
 
-	public static List<Contato> consultaA(String bairro) {
+	public static List<Contato> consultaA(String nomeBairro) { return daoContato.consultaA(nomeBairro); }
 		
-		List<Contato> listaBairros = new ArrayList<>();
-		
-		for (Contato i : daoContato.readAll()) {
-			if (i.getEnderecoStr().contains(bairro)) {
-				listaBairros.add(i);
-		}
-	}		
-		return listaBairros;
-}
-	
-	public static List<Telefone> consultaB() {
-		
-		List<Telefone> listaFixos = new ArrayList<>();
-		
-		for (Telefone i : daoTelefone.readAll()) {
-			if (i.getNumero().startsWith("3")) {
-				listaFixos.add(i);
-			}
-		}
-	return listaFixos;
-}
+	public static List<Telefone> consultaB() { return daoTelefone.consultaB();	}
 
-//	public static List<Telefone> consultaB() { return daoTelefone.temTelefoneFixo(); }
-	
-	/*
-	 * NOVO MÉTODO
-	 */
 	public static void apagarContato(String nome) throws Exception {
 		nome = nome.trim();
 
@@ -235,7 +205,6 @@ public class Fachada {
 		daoContato.delete(contato);
 
 		DAO.commit();
-
 	}
 }
 

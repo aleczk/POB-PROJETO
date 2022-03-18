@@ -1,8 +1,7 @@
 package aplicacao_console;
+
 import fachada.Fachada;
-import modelo.Contato;
-import modelo.Endereco;
-import modelo.Telefone;
+import modelo.*;
 
 public class AplicacaoConsole {
 
@@ -12,70 +11,70 @@ public class AplicacaoConsole {
 			Contato contato;				
 			Telefone telefone;		
 
-			contato = Fachada.criarContato("joao", "11/01/1990","av nego 30","tambau");
-			telefone = Fachada.adicionarTelefoneContato("99900000", "joao");
-			telefone = Fachada.adicionarTelefoneContato("99911111", "joao");
-			telefone = Fachada.adicionarTelefoneContato("99922222", "joao");
-			System.out.println("contato criado:"+contato);
-			contato = Fachada.criarContato("maria", "11/02/2000","av alm tamandare 100","tambau");
-			telefone = Fachada.adicionarTelefoneContato("32470000", "maria");
-			telefone = Fachada.adicionarTelefoneContato("32471111", "maria");
-			telefone = Fachada.adicionarTelefoneContato("99933333", "maria");
-			System.out.println("contato criado:"+contato);
-			contato = Fachada.criarContato("jose", "11/03/2001","av guarabira 30","manaira");
-			telefone = Fachada.adicionarTelefoneContato("99944444", "jose");
-			telefone = Fachada.adicionarTelefoneContato("32472222", "jose");
-			System.out.println("contato criado:"+contato);
-			contato = Fachada.criarContato("ana", "11/04/2002","av guarabira 30","manaira");
-			telefone = Fachada.adicionarTelefoneContato("99944444", "ana");
-			telefone = Fachada.adicionarTelefoneContato("32472222", "ana");
-			System.out.println("contato criado:"+contato);
-			contato = Fachada.criarContato("paulo", "11/05/2003","av argemiro de figueiredo 100","bessa");
-			telefone = Fachada.adicionarTelefoneContato("32473333", "paulo");
-			System.out.println("contato criado:"+contato);
+			contato = Fachada.criarContato("João", "11/01/1990","Avenida Nego, 30","Tambaú");
+			telefone = Fachada.adicionarTelefoneContato("99900000", "João");
+			telefone = Fachada.adicionarTelefoneContato("99911111", "João");
+			telefone = Fachada.adicionarTelefoneContato("99922222", "João");
+			System.out.println("Contato criado: "+contato);
+			contato = Fachada.criarContato("Maria", "11/02/2000","Avenida Alm. Tamandaré, 100","Tambaú");
+			telefone = Fachada.adicionarTelefoneContato("32470000", "Maria");
+			telefone = Fachada.adicionarTelefoneContato("32471111", "Maria");
+			telefone = Fachada.adicionarTelefoneContato("99933333", "Maria");
+			System.out.println("Contato criado: "+contato);
+			contato = Fachada.criarContato("José", "11/03/2001","Avenida Guarabira, 30","Manaíra");
+			telefone = Fachada.adicionarTelefoneContato("99944444", "José");
+			telefone = Fachada.adicionarTelefoneContato("32472222", "José");
+			System.out.println("Contato criado: "+contato);
+			contato = Fachada.criarContato("Ana", "11/04/2002","Avenida Guarabira, 30","Manaíra");
+			telefone = Fachada.adicionarTelefoneContato("99944444", "Ana");
+			telefone = Fachada.adicionarTelefoneContato("32472222", "Ana");
+			System.out.println("Contato criado: "+contato);
+			contato = Fachada.criarContato("Paulo", "11/05/2003","Avenida Argemiro de Figueiredo, 100","Bessa");
+			telefone = Fachada.adicionarTelefoneContato("32473333", "Paulo");
+			System.out.println("Contato criado: "+contato);
 
 
-			System.out.println("\n---------listagem de contatos-----");
+			System.out.println("\n---------Listagem de Contatos-----");
 			for(Contato c : Fachada.listarContatos("")) 
 				System.out.println(c);
-			System.out.println("\n---------listagem de telefones");
+			System.out.println("\n--------Listagem de Telefones-----");
 			for(Telefone t : Fachada.listarTelefones("")) 
 				System.out.println(t);
-			System.out.println("\n---------listagem de Enderecos");
+			System.out.println("\n---------Listagem de Enderecos----");
 			for(Endereco e : Fachada.listarEnderecos()) 
 				System.out.println(e.getLogradouro()+ " - " +e.getBairro());
 			
-			System.out.println("\n---------contatos jo");
-			for(Contato c : Fachada.listarContatos("jo")) 
+			System.out.println("\n---------Contatos com nomes que iniciam com \"Jo\"----");
+			for(Contato c : Fachada.listarContatos("Jo")) 
 				System.out.println(c);
-			System.out.println("\n---------telefones 11");
+			System.out.println("\n---------Telefones que possuem \"11\"----");
 			for(Telefone t : Fachada.listarTelefones("11")) 
 				System.out.println(t);
 
-			System.out.println("\n---------consulta A");
-			for(Contato c : Fachada.consultaA("tambau")) 
+			System.out.println("\n-------------------Consulta A----");
+			for(Contato c : Fachada.consultaA("Tambaú")) 
 				System.out.println(c);
-			System.out.println("\n---------consulta B");
+			System.out.println("\n-------------------Consulta B----");
 			for(Telefone t : Fachada.consultaB()) 
 					System.out.println(t);
 
 			Fachada.alterarTelefone("99900000", "99900001");
 			
-			Fachada.removerTelefoneContato("99944444", "jose");
-			Fachada.removerTelefoneContato("99944444", "ana");
+			Fachada.removerTelefoneContato("99944444", "José");
+			Fachada.removerTelefoneContato("99944444", "Ana");
 		
-			Fachada.apagarContato("ana");
-			Fachada.apagarContato("paulo");
+			Fachada.apagarContato("Ana");
+			Fachada.apagarContato("Paulo");
 
-			System.out.println("\n---------listagem de contatos-----");
+			System.out.println("\n---------Listagem de Contatos-----");
 			for(Contato c : Fachada.listarContatos("")) 
 				System.out.println(c);
-			System.out.println("\n---------listagem de telefones");
+			System.out.println("\n--------Listagem de Telefones-----");
 			for(Telefone t : Fachada.listarTelefones("")) 
 				System.out.println(t);
-			System.out.println("\n---------listagem de enderecos");
+			System.out.println("\n---------Listagem de Enderecos-----");
 			for(Endereco e : Fachada.listarEnderecos()) 
-				System.out.println(e.getId() +"-"+ e.getLogradouro()+ " - " +e.getBairro());
+				System.out.println("ID: " + e.getId() +" - "+ e.getLogradouro()+ " - " +e.getBairro());
 
 			Fachada.finalizar();
 
@@ -94,8 +93,8 @@ public class AplicacaoConsole {
 		Telefone telefone;
 		
 		try {
-			contato = Fachada.criarContato("teste1", "11/11/1990","av nego 30","tambau");
-			contato = Fachada.criarContato("teste1", "11/11/1990","av nego 30","tambau");
+			contato = Fachada.criarContato("teste1", "11/11/1990","Avenida Nego, 30","Tambaú");
+			contato = Fachada.criarContato("teste1", "11/11/1990","Avenida Nego, 30","Tambaú");
 			System.out.println("*************1--->Nao lançou exceção para criar contato "); 
 		}catch (Exception e) {
 			System.out.println("1ok--->"+e.getMessage());}
@@ -125,6 +124,6 @@ public class AplicacaoConsole {
 	public static void main (String[] args) {
 		AplicacaoConsole aplicacaoConsole = new AplicacaoConsole();
 		aplicacaoConsole.teste1();
-		// aplicacaoConsole.teste2();
+		//aplicacaoConsole.teste2();
 	}
 }

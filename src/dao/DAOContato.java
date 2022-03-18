@@ -26,4 +26,10 @@ public class DAOContato extends DAO<Contato> {
 
 		return (resultados.size() > 0) ? resultados.get(0) : null; }
 	
+	public List<Contato> consultaA(String nomeBairro) {
+		Query q = manager.query();
+		q.constrain(Contato.class);
+		q.descend("endereco").descend("bairro").constrain(nomeBairro);
+		return q.execute();
+	}
 }

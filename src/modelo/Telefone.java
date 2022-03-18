@@ -47,12 +47,10 @@ public class Telefone {
 		return null;
 	}
 
-
-
 	@Override
 	public String toString() {
-		String texto = "numero=" + numero ;
-		texto += ", contatos:";
+		String texto = "Número: " + numero;
+		texto += ", Contatos:";
 
 		for(Contato p: contatos) 
 			texto += " " + p.getNome() ;

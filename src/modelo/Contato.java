@@ -43,7 +43,7 @@ public class Contato {
 	}
 
 	public String getEnderecoStr() {
-		return endereco.getLogradouro()+" " +endereco.getBairro();
+		return endereco.getLogradouro()+" - " + endereco.getBairro();
 	}
 
 	public void setEndereco(Endereco endereco) {
@@ -83,9 +83,9 @@ public class Contato {
 
 	@Override
 	public String toString() {
-		String texto = "nome=" + nome + ", nascimento="+getNascimentoStr() + 
-				", endereco= "+getEnderecoStr();
-		texto += ", telefones:";
+		String texto = "Nome: " + nome + ", Nascimento: "+getNascimentoStr() + 
+				", Endereco: "+getEnderecoStr();
+		texto += ", Telefones:";
 		if (telefones.isEmpty())
 			texto += " vazia";
 		else 	

@@ -26,11 +26,10 @@ public class DAOTelefone extends DAO<Telefone> {
 
 		return (resultados.size() > 0) ? resultados.get(0) : null; }
 
-	public boolean temTelefoneFixo(String nome) {
+	public List<Telefone> consultaB() {
 		Query q = manager.query();
-		q.constrain(Contato.class);
-		q.descend("nome").constrain(nome);
-		q.descend("telefones").descend("numero").constrain("3").startsWith(true);
-		return q.execute().size()>0;
+		q.constrain(Telefone.class);
+		q.descend("numero").constrain("3").startsWith(true);
+		return q.execute();
 	}
 }
