@@ -248,6 +248,23 @@ public class TelaContato {
 		frame.getContentPane().add(textField_4);
 		
 		button_2 = new JButton("Apagar contato selecionado");
+		button_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					if (table.getSelectedRow() >= 0){
+						String nome = (String) table.getValueAt(table.getSelectedRow(), 0);
+						Fachada.apagarContato(nome);
+						label.setText("Contato " + nome + " removido com sucesso");
+						listagem();
+					}
+					else
+						label.setText("Selecione um contato para remover");
+				}
+				catch(Exception ex) {
+					label.setText(ex.getMessage());
+				}
+			}
+		});
 		button_2.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		button_2.setBounds(376, 213, 218, 23);
 		frame.getContentPane().add(button_2);
