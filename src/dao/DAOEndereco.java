@@ -21,7 +21,7 @@ public class DAOEndereco extends DAO<Endereco> {
 		String nomeEndereco = (String) chave;
 		Query q = manager.query();
 		q.constrain(Endereco.class);
-		q.descend("nome").constrain(nomeEndereco);
+		q.descend("logradouro").constrain(nomeEndereco);
 		List<Endereco> resultados = q.execute();
 
 		return (resultados.size() > 0) ? resultados.get(0) : null;

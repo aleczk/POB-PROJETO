@@ -152,7 +152,7 @@ public class Fachada {
 		DAO.commit();
 	}
 
-	public static List<Contato> listarContatos(String caracteres) {
+	public static List<Contato> listarContatos(String caracteres) throws Exception {
 		
 		List<Contato> listaContatos = new ArrayList<>();
 		
@@ -165,10 +165,13 @@ public class Fachada {
 				}
 			}
 		}
-		return listaContatos;
+		if (listaContatos.size() == 0) {
+			throw new Exception("Nenhum contato com este nome existe no banco de dados.");
+		} else
+			return listaContatos;
 	}
 			
-	public static List<Telefone> listarTelefones(String digitos) {
+	public static List<Telefone> listarTelefones(String digitos) throws Exception {
 		
 		List<Telefone> listaTelefones = new ArrayList<>();
 		
@@ -179,9 +182,12 @@ public class Fachada {
 				if (i.getNumero().contains(digitos)) {
 					listaTelefones.add(i);
 				}
-			}
+			} 
 		}
-		return listaTelefones;
+		if (listaTelefones.size() == 0) {
+			throw new Exception("Nenhum contato com estes dígitos existe no banco de dados.");
+		} else
+			return listaTelefones;
 	}
 
 	public static List<Endereco> listarEnderecos() { return daoEndereco.readAll(); }
